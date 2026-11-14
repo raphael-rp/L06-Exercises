@@ -4,12 +4,13 @@ import { Picker } from '@react-native-picker/picker';
 
 const Question = ({ imageUrl, options, selectedValue, onChange }) => {
   return (
-    <View>
-      <Image
-        source={{uri: imageUrl}}
-        style={styles.image}
-      />
-      <Text style={styles.question}>What car is this?</Text>
+    <View style={styles.card}>
+      <Image source={{ uri: imageUrl }} style={styles.image} />
+
+      <View style={[styles.questionBar, styles.bordered]}>
+        <Text style={styles.questionText}>What car is this?</Text>
+      </View>
+
       <Picker selectedValue={selectedValue} onValueChange={onChange}>
         <Picker.Item label="Select an item..." value="" />
         {options.map((option) => (
@@ -21,16 +22,40 @@ const Question = ({ imageUrl, options, selectedValue, onChange }) => {
 };
 
 const styles = StyleSheet.create({
+  card: {
+    flexDirection: 'column',
+    width: '100%',
+    maxWidth: 500,
+    alignSelf: 'center',
+    marginBottom: 16,
+    padding: 4,
+    borderWidth: 1,
+    borderColor: '#333333',
+    backgroundColor: '#FFFFFF',
+  },
   image: {
     width: '100%',
-    height: 250,
+    height: 220,
+    maxHeight: 220,
     resizeMode: 'cover',
   },
-  question: {
-    fontSize: 14,
-    color: 'gray',
-    marginTop: 8,
-    marginLeft: 8,
+  questionBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 4,
+    paddingVertical: 4,
+    backgroundColor: '#4682B4',
+  },
+  bordered: {
+    borderWidth: 2,
+    borderColor: '#1F3A5F',
+  },
+  questionText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
   },
 });
 
